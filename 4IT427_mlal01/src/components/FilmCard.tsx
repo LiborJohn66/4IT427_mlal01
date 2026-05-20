@@ -19,12 +19,11 @@ function FilmCard({
 
   return (
     <article>
-      {watched === true && <span>✓ Zhlédnuto</span>}
       <h2>{title}</h2>
+      {watched === true && <p>✓ Zhlédnuto</p>}
       <p>Rok vydání: {year}</p>
       <p>Žánr: {genre}</p>
       <p>{isRatingValid ? `Hodnocení: ${rating}/10` : 'Neplatné hodnocení'}</p>
-      <p>Zhlédnuto: {watched ? 'Ano' : 'Ne'}</p>
       <button type="button" onClick={() => onToggleWatched(title)}>
         Změnit stav zhlédnutí
       </button>
