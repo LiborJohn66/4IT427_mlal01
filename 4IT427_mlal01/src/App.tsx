@@ -1,6 +1,8 @@
+import { useEffect } from 'react'
 import FilmCard from './components/FilmCard'
+import useWatchlist, { type WatchlistFilm } from './hooks/useWatchlist'
 
-const films = [
+const initialFilms: WatchlistFilm[] = [
   {
     title: 'Inception',
     year: 2010,
@@ -25,13 +27,20 @@ const films = [
 ]
 
 function App() {
-  const handleToggleWatched = (title: string) => {
-    console.log(`Změnit stav zhlédnutí: ${title}`)
-  }
+  const { films, toggleWatched, markAllAsWatched } =
+    useWatchlist(initialFilms)
+
+  useEffect(() => {
+    const watchedCount = films.filter((film) => film.watched).length
+    document.title = `Watchlist (${watchedCount} / ${films.length} zhlédnuto)`
+  }, [films])
 
   return (
     <main>
       <h1>Film Watchlist</h1>
+      <button type="button" onClick={markAllAsWatched}>
+        Označit vše jako zhlédnuté
+      </button>
       {films.map((film) => (
         <FilmCard
           key={film.title}
@@ -40,7 +49,7 @@ function App() {
           genre={film.genre}
           rating={film.rating}
           watched={film.watched}
-          onToggleWatched={handleToggleWatched}
+          onToggleWatched={toggleWatched}
         />
       ))}
     </main>
