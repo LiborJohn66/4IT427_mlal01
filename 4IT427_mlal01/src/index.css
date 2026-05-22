@@ -1,0 +1,72 @@
+:root {
+  color-scheme: light;
+  --page-bg: #f6f2ea;
+  --surface: #fffdf8;
+  --surface-strong: #ffffff;
+  --surface-muted: #efe6d8;
+  --text: #1f2328;
+  --text-soft: #5a606b;
+  --border: #d7c7b2;
+  --accent: #a12f45;
+  --accent-strong: #7d1f33;
+  --accent-soft: #f4d7dc;
+  --success: #206b4f;
+  --success-soft: #d9f0e4;
+  --danger: #9c3433;
+  --danger-soft: #f7dddd;
+  --shadow: 0 1.2rem 3.2rem rgba(61, 39, 23, 0.12);
+  --card-shadow: 0 0.8rem 1.8rem rgba(61, 39, 23, 0.12);
+  font-family:
+    Inter, Avenir, 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont,
+    sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --page-bg: #121417;
+  --surface: #1d2228;
+  --surface-strong: #252c34;
+  --surface-muted: #313b46;
+  --text: #f6f1e8;
+  --text-soft: #c1c6cf;
+  --border: #4a545f;
+  --accent: #f08e77;
+  --accent-strong: #ffb19c;
+  --accent-soft: #4a2d2c;
+  --success: #8fe2b5;
+  --success-soft: #19392d;
+  --danger: #ffaaa3;
+  --danger-soft: #442725;
+  --shadow: 0 1.2rem 3.2rem rgba(0, 0, 0, 0.35);
+  --card-shadow: 0 0.9rem 2rem rgba(0, 0, 0, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 20rem;
+  min-height: 100vh;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-soft) 36%, transparent), transparent 36rem),
+    var(--page-bg);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}

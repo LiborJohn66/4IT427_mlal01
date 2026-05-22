@@ -1,0 +1,149 @@
+.card {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+  min-height: 17rem;
+  padding: clamp(1rem, 2vw, 1.35rem);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  background: var(--surface);
+  box-shadow: var(--card-shadow);
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  background: var(--surface-strong);
+  box-shadow: var(--shadow);
+  transform: translateY(-0.22rem);
+}
+
+.watched {
+  border-color: var(--success);
+  background:
+    linear-gradient(135deg, var(--success-soft), transparent 62%),
+    var(--surface);
+}
+
+.cardHeader {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.genre {
+  margin: 0 0 0.35rem;
+  color: var(--accent-strong);
+  font-weight: 900;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+}
+
+.card h3 {
+  margin: 0;
+  overflow-wrap: anywhere;
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.badge {
+  flex: 0 0 auto;
+  margin: 0;
+  border: 1px solid var(--success);
+  border-radius: 999px;
+  padding: 0.35rem 0.55rem;
+  background: var(--success-soft);
+  color: var(--success);
+  font-size: 0.8rem;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+  margin: 0;
+}
+
+.details div {
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  padding: 0.7rem;
+  background: color-mix(in srgb, var(--surface-strong) 74%, transparent);
+}
+
+.details dt {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.details dd {
+  margin: 0.35rem 0 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  font-weight: 900;
+}
+
+.actions {
+  display: grid;
+  gap: 0.65rem;
+  align-self: end;
+  margin-top: auto;
+}
+
+.statusButton,
+.removeButton {
+  min-height: 2.8rem;
+  border-radius: 0.45rem;
+  padding: 0.65rem 0.75rem;
+  font-weight: 850;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    transform 160ms ease;
+}
+
+.statusButton {
+  border: 1px solid var(--accent);
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+}
+
+.removeButton {
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+  color: var(--danger);
+}
+
+.statusButton:hover {
+  border-color: var(--accent-strong);
+  background: var(--accent);
+  color: var(--surface-strong);
+  transform: translateY(-0.1rem);
+}
+
+.removeButton:hover {
+  border-color: var(--danger);
+  background: var(--danger-soft);
+  transform: translateY(-0.1rem);
+}
+
+.statusButton:focus-visible,
+.removeButton:focus-visible {
+  outline: 0.22rem solid color-mix(in srgb, var(--accent) 35%, transparent);
+  outline-offset: 0.12rem;
+}
+
+@media (min-width: 420px) {
+  .actions {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+}
