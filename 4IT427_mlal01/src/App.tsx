@@ -1,19 +1,12 @@
 /* Stylingová metoda: CSS Modules */
 import { useEffect, useState } from 'react'
-import AddFilmForm from './components/AddFilmForm'
-import FilmCard from './components/FilmCard'
-import { useWatchlist } from './context/WatchlistContext'
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
+import AddFilmPage from './pages/AddFilmPage'
+import WatchlistPage from './pages/WatchlistPage'
 import styles from './App.module.css'
 
 function App() {
-  const { films, removeFilm, toggleWatched, markAllAsWatched } =
-    useWatchlist()
-  const watchedCount = films.filter((film) => film.watched).length
   const [isDarkTheme, setIsDarkTheme] = useState(false)
-
-  useEffect(() => {
-    document.title = `Watchlist (${watchedCount} / ${films.length} zhlédnuto)`
-  }, [films.length, watchedCount])
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', isDarkTheme)
@@ -30,10 +23,22 @@ function App() {
           <p className={styles.kicker}>Osobní filmový seznam</p>
           <h1>Film Watchlist</h1>
         </div>
-        <div className={styles.headerActions}>
-          <p className={styles.progress}>
-            <strong>{watchedCount}</strong> / {films.length} zhlédnuto
-          </p>
+        <div className={styles.shellActions}>
+          <nav className={styles.navigation} aria-label="Hlavní navigace">
+            <NavLink
+              to="/"
+              end
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Můj watchlist
+            </NavLink>
+            <NavLink
+              to="/form"
+              className={({ isActive }) => (isActive ? 'active' : '')}
+            >
+              Přidat film
+            </NavLink>
+          </nav>
           <button
             className={styles.themeButton}
             type="button"
@@ -43,36 +48,11 @@ function App() {
           </button>
         </div>
       </header>
-      <section className={styles.workspace}>
-        <AddFilmForm />
-        <section className={styles.collection} aria-label="Filmový watchlist">
-          <div className={styles.collectionHeader}>
-            <h2>Filmy ve watchlistu</h2>
-            <button
-              className={styles.markAllButton}
-              type="button"
-              onClick={markAllAsWatched}
-            >
-              Označit vše jako zhlédnuté
-            </button>
-          </div>
-          <div className={styles.filmGrid}>
-            {films.map((film) => (
-              <FilmCard
-                key={film.id}
-                id={film.id}
-                title={film.title}
-                year={film.year}
-                genre={film.genre}
-                rating={film.rating}
-                watched={film.watched}
-                onToggleWatched={toggleWatched}
-                onRemove={removeFilm}
-              />
-            ))}
-          </div>
-        </section>
-      </section>
+      <Routes>
+        <Route path="/" element={<WatchlistPage />} />
+        <Route path="/form" element={<AddFilmPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </main>
   )
 }
