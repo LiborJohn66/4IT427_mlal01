@@ -1,0 +1,42 @@
+[
+  {
+    "id": "inception-2010",
+    "title": "Inception",
+    "year": 2010,
+    "genre": "Sci-fi",
+    "rating": 9,
+    "watched": true
+  },
+  {
+    "id": "eyes-wide-shut-1999",
+    "title": "Eyes Wide Shut",
+    "year": 1999,
+    "genre": "Mystery",
+    "rating": 8,
+    "watched": true
+  },
+  {
+    "id": "fight-club-1999",
+    "title": "Fight Club",
+    "year": 1999,
+    "genre": "Thriller",
+    "rating": 10,
+    "watched": true
+  },
+  {
+    "id": "arrival-2016",
+    "title": "Arrival",
+    "year": 2016,
+    "genre": "Sci-fi drama",
+    "rating": 9,
+    "watched": false
+  },
+  {
+    "id": "parasite-2019",
+    "title": "Parasite",
+    "year": 2019,
+    "genre": "Thriller",
+    "rating": 9,
+    "watched": false
+  }
+]

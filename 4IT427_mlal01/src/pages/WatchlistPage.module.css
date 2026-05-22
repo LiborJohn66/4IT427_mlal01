@@ -2,6 +2,28 @@
   min-width: 0;
 }
 
+.statePanel {
+  display: grid;
+  justify-items: start;
+  gap: 0.65rem;
+  width: min(28rem, 100%);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  padding: clamp(1rem, 3vw, 1.4rem);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.statePanel h2,
+.statePanel p {
+  margin: 0;
+}
+
+.statePanel p {
+  color: var(--text-soft);
+  line-height: 1.45;
+}
+
 .pageHeader {
   display: flex;
   flex-direction: column;
@@ -32,7 +54,8 @@
   font-size: 1.2rem;
 }
 
-.markAllButton {
+.markAllButton,
+.retryButton {
   min-height: 3rem;
   border: 1px solid var(--accent);
   border-radius: 0.5rem;
@@ -46,13 +69,15 @@
     transform 160ms ease;
 }
 
-.markAllButton:hover {
+.markAllButton:hover,
+.retryButton:hover {
   border-color: var(--accent-strong);
   background: var(--accent-strong);
   transform: translateY(-0.1rem);
 }
 
-.markAllButton:focus-visible {
+.markAllButton:focus-visible,
+.retryButton:focus-visible {
   outline: 0.22rem solid color-mix(in srgb, var(--accent) 35%, transparent);
   outline-offset: 0.12rem;
 }

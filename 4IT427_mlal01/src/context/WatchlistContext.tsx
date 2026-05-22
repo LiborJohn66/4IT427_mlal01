@@ -4,6 +4,8 @@ import {
   useState,
   type ReactNode,
 } from 'react'
+import { useQuery } from '@tanstack/react-query'
+import { fetchFilms } from '../api/films'
 import type { Film } from '../types/film.types'
 
 type NewFilm = Omit<Film, 'id' | 'watched'>
@@ -14,74 +16,103 @@ type WatchlistContextValue = {
   removeFilm: (id: string) => void
   toggleWatched: (id: string) => void
   markAllAsWatched: () => void
+  isLoadingFilms: boolean
+  isFilmsError: boolean
+  filmsError: Error | null
+  refetchFilms: () => void
 }
 
-const initialFilms: Film[] = [
-  {
-    id: 'inception-2010',
-    title: 'Inception',
-    year: 2010,
-    genre: 'Sci-fi',
-    rating: 9,
-    watched: true,
-  },
-  {
-    id: 'eyes-wide-shut-1999',
-    title: 'Eyes Wide Shut',
-    year: 1999,
-    genre: 'Mystery',
-    rating: 8,
-    watched: true,
-  },
-  {
-    id: 'fight-club-1999',
-    title: 'Fight Club',
-    year: 1999,
-    genre: 'Thriller',
-    rating: 10,
-    watched: true,
-  },
-]
+type FilmChanges = {
+  addedFilms: Film[]
+  removedFilmIds: string[]
+  watchedById: Record<string, boolean>
+}
 
 const WatchlistContext = createContext<WatchlistContextValue | null>(null)
 
 export function WatchlistProvider({ children }: { children: ReactNode }) {
-  const [films, setFilms] = useState(initialFilms)
+  const [filmChanges, setFilmChanges] = useState<FilmChanges>({
+    addedFilms: [],
+    removedFilmIds: [],
+    watchedById: {},
+  })
+  const filmsQuery = useQuery({
+    queryKey: ['films'],
+    queryFn: fetchFilms,
+  })
+  const films = [...(filmsQuery.data ?? []), ...filmChanges.addedFilms]
+    .filter((film) => !filmChanges.removedFilmIds.includes(film.id))
+    .map((film) =>
+      filmChanges.watchedById[film.id] === undefined
+        ? film
+        : { ...film, watched: filmChanges.watchedById[film.id] },
+    )
 
   const addFilm = (film: NewFilm) => {
-    setFilms((currentFilms) => [
-      ...currentFilms,
-      {
-        ...film,
-        id: crypto.randomUUID(),
-        watched: false,
-      },
-    ])
+    setFilmChanges((currentChanges) => ({
+      ...currentChanges,
+      addedFilms: [
+        ...currentChanges.addedFilms,
+        {
+          ...film,
+          id: Date.now().toString(),
+          watched: false,
+        },
+      ],
+    }))
   }
 
   const removeFilm = (id: string) => {
-    setFilms((currentFilms) =>
-      currentFilms.filter((film) => film.id !== id),
-    )
+    setFilmChanges((currentChanges) => ({
+      ...currentChanges,
+      addedFilms: currentChanges.addedFilms.filter((film) => film.id !== id),
+      removedFilmIds: currentChanges.removedFilmIds.includes(id)
+        ? currentChanges.removedFilmIds
+        : [...currentChanges.removedFilmIds, id],
+    }))
   }
 
   const toggleWatched = (id: string) => {
-    setFilms((currentFilms) =>
-      currentFilms.map((film) =>
-        film.id === id ? { ...film, watched: !film.watched } : film,
-      ),
-    )
+    const changedFilm = films.find((film) => film.id === id)
+
+    if (!changedFilm) {
+      return
+    }
+
+    setFilmChanges((currentChanges) => ({
+      ...currentChanges,
+      watchedById: {
+        ...currentChanges.watchedById,
+        [id]: !changedFilm.watched,
+      },
+    }))
   }
 
   const markAllAsWatched = () => {
-    setFilms((currentFilms) =>
-      currentFilms.map((film) => ({ ...film, watched: true })),
-    )
+    setFilmChanges((currentChanges) => ({
+      ...currentChanges,
+      watchedById: {
+        ...currentChanges.watchedById,
+        ...Object.fromEntries(films.map((film) => [film.id, true])),
+      },
+    }))
   }
 
   return (
     <WatchlistContext
-      value={{ films, addFilm, removeFilm, toggleWatched, markAllAsWatched }}
+      value={{
+        films,
+        addFilm,
+        removeFilm,
+        toggleWatched,
+        markAllAsWatched,
+        isLoadingFilms: filmsQuery.isPending,
+        isFilmsError: filmsQuery.isError && !filmsQuery.data,
+        filmsError: filmsQuery.error,
+        refetchFilms: () => {
+          void filmsQuery.refetch()
+        },
+      }}
     >
       {children}
     </WatchlistContext>

@@ -4,13 +4,46 @@ import { useWatchlist } from '../context/WatchlistContext'
 import styles from './WatchlistPage.module.css'
 
 function WatchlistPage() {
-  const { films, removeFilm, toggleWatched, markAllAsWatched } =
-    useWatchlist()
+  const {
+    films,
+    removeFilm,
+    toggleWatched,
+    markAllAsWatched,
+    isLoadingFilms,
+    isFilmsError,
+    filmsError,
+    refetchFilms,
+  } = useWatchlist()
   const watchedCount = films.filter((film) => film.watched).length
 
   useEffect(() => {
     document.title = `Watchlist (${watchedCount} / ${films.length} zhlédnuto)`
   }, [films.length, watchedCount])
+
+  if (isLoadingFilms) {
+    return (
+      <section className={styles.statePanel} aria-live="polite">
+        <h2>Filmy ve watchlistu</h2>
+        <p>Načítám...</p>
+      </section>
+    )
+  }
+
+  if (isFilmsError) {
+    return (
+      <section className={styles.statePanel} role="alert">
+        <h2>Filmy se nepodařilo načíst</h2>
+        <p>{filmsError?.message ?? 'Zkuste načtení zopakovat.'}</p>
+        <button
+          className={styles.retryButton}
+          type="button"
+          onClick={refetchFilms}
+        >
+          Načíst znovu
+        </button>
+      </section>
+    )
+  }
 
   return (
     <section className={styles.page} aria-label="Filmový watchlist">
