@@ -51,6 +51,24 @@
   max-width: 960px;
 }
 
+.event-list {
+  display: grid;
+  gap: 16px;
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+}
+
+.event-list-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.event-list-item h2 {
+  margin-bottom: 12px;
+}
+
 @media (max-width: 720px) {
   .app-header {
     align-items: flex-start;
