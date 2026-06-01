@@ -5,7 +5,11 @@
 }
 
 .app-header {
+  align-items: center;
   border-bottom: 1px solid var(--border);
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
   padding: 20px 32px;
   text-align: left;
 }
@@ -16,6 +20,27 @@
   font-weight: 700;
 }
 
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.navbar-link {
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 10px;
+  text-decoration: none;
+}
+
+.navbar-link:hover,
+.navbar-link-active {
+  background: var(--nav-bg);
+  color: var(--text-h);
+}
+
 .app-main {
   flex: 1;
   padding: 40px 32px;
@@ -24,4 +49,11 @@
 
 .page {
   max-width: 960px;
+}
+
+@media (max-width: 720px) {
+  .app-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
