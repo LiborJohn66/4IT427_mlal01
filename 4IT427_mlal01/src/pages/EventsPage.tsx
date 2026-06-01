@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { EventCard } from '../components/EventCard'
 import type { Event } from '../types/event.types'
 
 type EventsResponse = {
@@ -41,11 +42,7 @@ export function EventsPage() {
       {!isLoading && !error && (
         <ul className="event-list">
           {events.map((event) => (
-            <li key={event.id} className="event-list-item">
-              <h2>{event.name}</h2>
-              <p>{event.date}</p>
-              <p>{event.location}</p>
-            </li>
+            <EventCard key={event.id} event={event} />
           ))}
         </ul>
       )}

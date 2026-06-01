@@ -59,13 +59,13 @@
   padding: 0;
 }
 
-.event-list-item {
+.event-card {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 20px;
 }
 
-.event-list-item h2 {
+.event-card h2 {
   margin-bottom: 12px;
 }
 
