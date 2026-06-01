@@ -69,6 +69,32 @@
   margin-bottom: 12px;
 }
 
+.event-card-link {
+  color: var(--text-h);
+  display: inline-flex;
+  font-weight: 700;
+  margin-top: 16px;
+}
+
+.event-detail-list {
+  display: grid;
+  gap: 16px;
+  margin: 24px 0 0;
+}
+
+.event-detail-list dt {
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.event-detail-list dd {
+  color: var(--text-h);
+  font-size: 18px;
+  margin: 4px 0 0;
+}
+
 @media (max-width: 720px) {
   .app-header {
     align-items: flex-start;
