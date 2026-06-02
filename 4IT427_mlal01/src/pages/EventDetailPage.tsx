@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import type { Event } from '../types/event.types'
+import type { Task } from '../types/task.types'
 
 type EventsResponse = {
   events: Event[]
+  tasks: Task[]
 }
 
 export function EventDetailPage() {
   const { id } = useParams()
   const [event, setEvent] = useState<Event | null>(null)
+  const [tasks, setTasks] = useState<Task[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -29,6 +32,7 @@ export function EventDetailPage() {
         }
 
         setEvent(selectedEvent)
+        setTasks(data.tasks.filter((task) => task.eventId === selectedEvent.id))
       } catch {
         setError('Event could not be loaded.')
       } finally {
@@ -58,6 +62,26 @@ export function EventDetailPage() {
               <dd>{event.location}</dd>
             </div>
           </dl>
+
+          <section className="event-tasks">
+            <h2>Tasks</h2>
+            {tasks.length === 0 ? (
+              <p>No tasks for this event yet.</p>
+            ) : (
+              <ul className="task-list">
+                {tasks.map((task) => (
+                  <li key={task.id} className="task-list-item">
+                    <h3>{task.title}</h3>
+                    <p>{task.category}</p>
+                    <p>
+                      {task.status} · {task.priority} priority
+                    </p>
+                    <p>Deadline: {task.deadline}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
         </div>
       )}
     </section>
