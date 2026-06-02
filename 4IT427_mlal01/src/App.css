@@ -118,6 +118,52 @@
   margin: 0 0 8px;
 }
 
+.task-card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0;
+}
+
+.badge {
+  border-radius: 999px;
+  display: inline-flex;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+  padding: 7px 10px;
+}
+
+.status-badge-todo {
+  background: #edf2f7;
+  color: #334155;
+}
+
+.status-badge-in-progress {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.status-badge-done {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.priority-badge-low {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.priority-badge-medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.priority-badge-high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
 @media (max-width: 720px) {
   .app-header {
     align-items: flex-start;
