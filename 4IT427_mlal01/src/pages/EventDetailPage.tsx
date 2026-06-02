@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { TaskCard } from '../components/TaskCard'
 import type { Event } from '../types/event.types'
 import type { Task } from '../types/task.types'
 
@@ -70,14 +71,7 @@ export function EventDetailPage() {
             ) : (
               <ul className="task-list">
                 {tasks.map((task) => (
-                  <li key={task.id} className="task-list-item">
-                    <h3>{task.title}</h3>
-                    <p>{task.category}</p>
-                    <p>
-                      {task.status} · {task.priority} priority
-                    </p>
-                    <p>Deadline: {task.deadline}</p>
-                  </li>
+                  <TaskCard key={task.id} task={task} />
                 ))}
               </ul>
             )}

@@ -107,13 +107,13 @@
   padding: 0;
 }
 
-.task-list-item {
+.task-card {
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 16px;
 }
 
-.task-list-item h3 {
+.task-card h3 {
   color: var(--text-h);
   margin: 0 0 8px;
 }
