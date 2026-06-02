@@ -99,6 +99,31 @@
   margin-top: 40px;
 }
 
+.task-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 24px 0;
+}
+
+.task-filter {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 8px 12px;
+}
+
+.task-filter:hover,
+.task-filter-active {
+  background: var(--nav-bg);
+  color: var(--text-h);
+}
+
 .task-list {
   display: grid;
   gap: 12px;
