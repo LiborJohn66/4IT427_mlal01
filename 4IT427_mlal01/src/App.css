@@ -51,6 +51,31 @@
   max-width: 960px;
 }
 
+.dashboard-stats {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  margin-top: 24px;
+}
+
+.dashboard-stat {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.dashboard-stat p {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.dashboard-stat strong {
+  color: var(--text-h);
+  font-size: 28px;
+}
+
 .event-list {
   display: grid;
   gap: 16px;
