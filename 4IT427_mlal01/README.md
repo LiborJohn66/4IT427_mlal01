@@ -7,6 +7,8 @@ EventMaster is a React and TypeScript application for planning events and tracki
 - Dashboard with task statistics
 - Event list and event detail page
 - Task list in event detail
+- Task detail page with linked event and responsible person
+- Team page with responsible people and task counts
 - Global task page with status filtering
 - Status and priority badges
 - Loading and error states
@@ -20,9 +22,9 @@ EventMaster is a React and TypeScript application for planning events and tracki
 - `/events` - Event list
 - `/events/:id` - Event detail
 - `/tasks` - All tasks
-- `/tasks/:id` - Task detail placeholder
-- `/team` - Team placeholder
-- `/about` - Project information placeholder
+- `/tasks/:id` - Task detail
+- `/team` - Team and responsible people
+- `/about` - Project information
 
 ## Data Model
 

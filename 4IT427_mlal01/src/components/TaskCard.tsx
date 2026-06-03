@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { PriorityBadge } from './PriorityBadge'
 import { StatusBadge } from './StatusBadge'
 import type { Task } from '../types/task.types'
@@ -16,6 +17,9 @@ export function TaskCard({ task }: TaskCardProps) {
         <PriorityBadge priority={task.priority} />
       </div>
       <p>Deadline: {task.deadline}</p>
+      <Link className="task-card-link" to={`/tasks/${task.id}`}>
+        View detail
+      </Link>
     </li>
   )
 }

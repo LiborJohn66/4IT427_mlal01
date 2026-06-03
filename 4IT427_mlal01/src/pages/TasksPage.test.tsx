@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router-dom'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { TasksPage } from './TasksPage'
 
@@ -52,7 +53,11 @@ describe('TasksPage', () => {
       }),
     )
 
-    render(<TasksPage />)
+    render(
+      <MemoryRouter>
+        <TasksPage />
+      </MemoryRouter>,
+    )
 
     expect(await screen.findByText('Confirm main hall layout')).not.toBeNull()
     expect(screen.getByText('Book speaker hotel rooms')).not.toBeNull()
