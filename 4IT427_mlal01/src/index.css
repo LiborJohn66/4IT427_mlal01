@@ -40,6 +40,7 @@
 
 body {
   margin: 0;
+  min-width: 320px;
 }
 
 h1,
@@ -54,6 +55,9 @@ h1 {
   margin: 0 0 16px;
   @media (max-width: 1024px) {
     font-size: 32px;
+  }
+  @media (max-width: 420px) {
+    font-size: 28px;
   }
 }
 h2 {

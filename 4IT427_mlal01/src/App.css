@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  min-width: 0;
 }
 
 .app-header {
@@ -24,6 +25,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  justify-content: flex-end;
 }
 
 .navbar-link {
@@ -43,12 +45,14 @@
 
 .app-main {
   flex: 1;
-  padding: 40px 32px;
+  padding: 40px clamp(20px, 5vw, 48px);
   text-align: left;
 }
 
 .page {
+  margin: 0 auto;
   max-width: 960px;
+  width: 100%;
 }
 
 .state-message {
@@ -70,7 +74,7 @@
 .dashboard-stats {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(180px, 100%), 1fr));
   margin-top: 24px;
 }
 
@@ -157,6 +161,7 @@
   font-size: 15px;
   font-weight: 700;
   padding: 8px 12px;
+  text-align: center;
 }
 
 .task-filter:hover,
@@ -234,5 +239,43 @@
   .app-header {
     align-items: flex-start;
     flex-direction: column;
+    gap: 16px;
+    padding: 18px 20px;
+  }
+
+  .navbar {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .navbar-link {
+    flex: 1 1 calc(50% - 8px);
+    text-align: center;
+  }
+
+  .app-main {
+    padding: 28px 20px;
+  }
+
+  .dashboard-stat,
+  .event-card,
+  .task-card,
+  .state-message {
+    padding: 16px;
+  }
+
+  .task-filter {
+    flex: 1 1 calc(50% - 8px);
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar-link,
+  .task-filter {
+    flex-basis: 100%;
+  }
+
+  .dashboard-stat strong {
+    font-size: 24px;
   }
 }
