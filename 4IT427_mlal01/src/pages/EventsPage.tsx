@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
+import { ErrorState } from '../components/ErrorState'
 import { EventCard } from '../components/EventCard'
+import { LoadingState } from '../components/LoadingState'
 import type { Event } from '../types/event.types'
 
 type EventsResponse = {
@@ -36,8 +38,8 @@ export function EventsPage() {
     <section className="page">
       <h1>Events</h1>
 
-      {isLoading && <p>Loading events...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <LoadingState message="Loading events..." />}
+      {error && <ErrorState message={error} />}
 
       {!isLoading && !error && (
         <ul className="event-list">

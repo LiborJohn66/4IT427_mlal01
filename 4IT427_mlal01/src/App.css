@@ -51,6 +51,22 @@
   max-width: 960px;
 }
 
+.state-message {
+  background: var(--nav-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-h);
+  font-weight: 700;
+  margin-top: 24px;
+  padding: 16px;
+}
+
+.state-message-error {
+  background: #fee2e2;
+  border-color: #fecaca;
+  color: #b91c1c;
+}
+
 .dashboard-stats {
   display: grid;
   gap: 16px;

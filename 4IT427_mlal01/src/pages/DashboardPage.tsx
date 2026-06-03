@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
+import { ErrorState } from '../components/ErrorState'
+import { LoadingState } from '../components/LoadingState'
 import type { Task } from '../types/task.types'
 
 type DashboardResponse = {
@@ -58,8 +60,8 @@ export function DashboardPage() {
     <section className="page">
       <h1>Dashboard</h1>
 
-      {isLoading && <p>Loading dashboard...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <LoadingState message="Loading dashboard..." />}
+      {error && <ErrorState message={error} />}
 
       {!isLoading && !error && (
         <div className="dashboard-stats">

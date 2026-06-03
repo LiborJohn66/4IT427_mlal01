@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
+import { ErrorState } from '../components/ErrorState'
+import { LoadingState } from '../components/LoadingState'
 import { TaskCard } from '../components/TaskCard'
 import type { Task, TaskStatus } from '../types/task.types'
 
@@ -71,8 +73,8 @@ export function TasksPage() {
         ))}
       </div>
 
-      {isLoading && <p>Loading tasks...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <LoadingState message="Loading tasks..." />}
+      {error && <ErrorState message={error} />}
 
       {!isLoading && !error && (
         <ul className="task-list">

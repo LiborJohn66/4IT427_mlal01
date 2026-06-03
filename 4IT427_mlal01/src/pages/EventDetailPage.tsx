@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import { ErrorState } from '../components/ErrorState'
+import { LoadingState } from '../components/LoadingState'
 import { TaskCard } from '../components/TaskCard'
 import type { Event } from '../types/event.types'
 import type { Task } from '../types/task.types'
@@ -46,8 +48,8 @@ export function EventDetailPage() {
 
   return (
     <section className="page">
-      {isLoading && <p>Loading event...</p>}
-      {error && <p>{error}</p>}
+      {isLoading && <LoadingState message="Loading event..." />}
+      {error && <ErrorState message={error} />}
 
       {!isLoading && !error && event && (
         <div className="event-detail">
