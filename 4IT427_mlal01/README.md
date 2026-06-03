@@ -1,73 +1,90 @@
-# React + TypeScript + Vite
+# EventMaster
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+EventMaster is a React and TypeScript application for planning events and tracking event tasks. It helps organize events, responsibilities, priorities, deadlines, and task progress in one small dashboard-style app.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Dashboard with task statistics
+- Event list and event detail page
+- Task list in event detail
+- Global task page with status filtering
+- Status and priority badges
+- Loading and error states
+- Mock API data in `public/db.json`
+- Unit test for task completion percentage
+- Integration test for task filtering
 
-## React Compiler
+## Pages
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `/` - Dashboard
+- `/events` - Event list
+- `/events/:id` - Event detail
+- `/tasks` - All tasks
+- `/tasks/:id` - Task detail placeholder
+- `/team` - Team placeholder
+- `/about` - Project information placeholder
 
-## Expanding the ESLint configuration
+## Data Model
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Mock data is stored in `public/db.json` and contains:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- `events`
+- `tasks`
+- `users`
+- `categories`
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Main task fields:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```ts
+type Task = {
+  id: string
+  eventId: string
+  title: string
+  category: string
+  assigneeId: string
+  status: 'todo' | 'in-progress' | 'done'
+  priority: 'low' | 'medium' | 'high'
+  deadline: string
+}
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Install dependencies:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+Start development server:
+
+```bash
+npm run dev
+```
+
+Run production build:
+
+```bash
+npm run build
+```
+
+Run tests:
+
+```bash
+npm test
+```
+
+Run lint:
+
+```bash
+npm run lint
+```
+
+## Tech Stack
+
+- React
+- TypeScript
+- Vite
+- React Router
+- Vitest
+- Testing Library
