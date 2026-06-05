@@ -59,7 +59,7 @@ export function TeamPage() {
             <li key={member.id} className="team-card">
               <h2>{member.name}</h2>
               <p>{member.role}</p>
-              <p>{member.email}</p>
+              <p className="team-card-email">{member.email}</p>
               <strong>{member.taskCount} tasks</strong>
             </li>
           ))}

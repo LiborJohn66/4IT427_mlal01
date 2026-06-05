@@ -218,7 +218,13 @@
 .team-card {
   border: 1px solid var(--border);
   border-radius: 8px;
+  min-width: 0;
   padding: 20px;
+}
+
+.team-card-email {
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .team-card strong {
